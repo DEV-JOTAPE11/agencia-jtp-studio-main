@@ -79,7 +79,11 @@ export function Hero() {
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#orcamento"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground glow-blue transition-all hover:glow-blue-strong hover:scale-105"
+            className="inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold text-white glow-blue transition-all hover:glow-blue-strong hover:scale-105"
+            style={{
+              background:
+                "linear-gradient(90deg, rgb(75, 108, 183) 0%, rgb(24, 40, 72) 100%)",
+            }}
           >
             Solicitar Orçamento
           </a>
@@ -121,14 +125,14 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
-     <motion.div
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 z-10"
+        className="absolute bottom-2 z-10"
       >
-        <a 
-          href="#portfolio" 
+        <a
+          href="#portfolio"
           className="block transition-opacity duration-300 hover:opacity-50 cursor-pointer"
           aria-label="Ver Portfólio"
         >
