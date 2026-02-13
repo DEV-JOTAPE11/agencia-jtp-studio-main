@@ -121,13 +121,19 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
-      <motion.div
+     <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8"
+        className="absolute bottom-8 z-10"
       >
-        <ArrowDown className="h-5 w-5 text-muted-foreground animate-bounce" />
+        <a 
+          href="#portfolio" 
+          className="block transition-opacity duration-300 hover:opacity-50 cursor-pointer"
+          aria-label="Ver Portfólio"
+        >
+          <ArrowDown className="h-5 w-5 text-white/50 animate-bounce" />
+        </a>
       </motion.div>
     </div>
   );

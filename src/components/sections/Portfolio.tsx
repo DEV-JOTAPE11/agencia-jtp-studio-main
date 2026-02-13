@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const projects = [
   {
@@ -36,7 +43,8 @@ export function Portfolio() {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">Alguns dos projetos que desenvolvemos para empresas de todo o Brasil.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Versão Desktop (Grid com Hover) - Mantida Original */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
@@ -66,6 +74,38 @@ export function Portfolio() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Versão Mobile (Carrossel com Botão Fixo) - Nova Funcionalidade */}
+        <div className="md:hidden px-4">
+          <Carousel className="w-full max-w-xs mx-auto" opts={{ loop: true }}>
+            <CarouselContent>
+              {projects.map((p) => (
+                <CarouselItem key={p.title}>
+                  <div className="glass-card overflow-hidden h-full flex flex-col">
+                    <div className="relative aspect-video overflow-hidden">
+                      <img src={p.image} alt={p.title} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute top-3 left-3 flex gap-2">
+                        {p.badges.map(b => (
+                          <Badge key={b} className="bg-primary/80 text-primary-foreground text-[10px] backdrop-blur-sm">{b}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="p-5 flex flex-col flex-grow">
+                      <h3 className="font-semibold mb-1">{p.title}</h3>
+                      <p className="text-xs text-primary mb-2">{p.category}</p>
+                      <p className="text-sm text-muted-foreground mb-4 flex-grow">{p.desc}</p>
+                      <a href="#" className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground glow-blue w-full mt-auto">
+                        Visitar Site <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
+          </Carousel>
         </div>
 
         <div className="text-center mt-12">
