@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 216 38% 3%;
+    --foreground: 216 100% 96%;
+    --card: 216 70% 9%;
+    --card-foreground: 216 100% 96%;
+    --popover: 216 70% 9%;
+    --popover-foreground: 216 100% 96%;
+    --primary: 210 70% 50%;
+    --primary-foreground: 216 100% 96%;
+    --secondary: 216 50% 12%;
+    --secondary-foreground: 216 100% 96%;
+    --muted: 216 30% 18%;
+    --muted-foreground: 220 33% 75%;
+    --accent: 210 100% 62%;
+    --accent-foreground: 216 100% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 216 100% 96%;
+    --border: 210 40% 18%;
+    --input: 216 50% 15%;
+    --ring: 210 100% 62%;
+    --radius: 0.75rem;
+    --sidebar-background: 216 50% 5%;
+    --sidebar-foreground: 216 100% 96%;
+    --sidebar-primary: 210 70% 50%;
+    --sidebar-primary-foreground: 216 100% 96%;
+    --sidebar-accent: 210 100% 62%;
+    --sidebar-accent-foreground: 216 100% 96%;
+    --sidebar-border: 210 40% 18%;
+    --sidebar-ring: 210 100% 62%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply rounded-xl backdrop-blur-xl;
+    background: rgba(7, 20, 39, 0.55);
+    border: 1px solid rgba(40, 126, 215, 0.2);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(40, 126, 215, 0.15), 0 0 40px rgba(40, 126, 215, 0.05);
+  }
+
+  .glow-blue-strong {
+    box-shadow: 0 0 20px rgba(58, 160, 255, 0.3), 0 0 60px rgba(40, 126, 215, 0.1);
+  }
+
+  .text-gradient-blue {
+    background: linear-gradient(to right, hsl(210 70% 50%), hsl(210 100% 62%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
