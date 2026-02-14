@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const faqs = [
-  { q: 'Quanto tempo leva para criar um site?', a: 'O prazo médio é de 7 a 15 dias úteis, dependendo da complexidade do projeto. Landing pages ficam prontas em até 5 dias úteis.' },
-  { q: 'Qual o investimento para criar um site?', a: 'Os valores começam a partir de R$ 997 para landing pages. Sites institucionais a partir de R$ 3.497. Consulte nossos planos para mais detalhes.' },
+  { q: 'Quanto tempo leva para criar um site?', a: 'O prazo médio é de 4 a 15 dias úteis, dependendo da complexidade do projeto. Landing pages ficam prontas em até 5 dias úteis.' },
+  { q: 'Qual o investimento para criar um site?', a: 'Os valores começam a partir de R$ 493 para landing pages. Sites institucionais a partir de R$ 897. Consulte nossos planos para mais detalhes.' },
   { q: 'O site fica otimizado para Google?', a: 'Sim! Todos os nossos sites seguem as melhores práticas de SEO on-page, com meta tags, sitemap, performance otimizada e código limpo.' },
   { q: 'Vocês oferecem garantia?', a: 'Oferecemos 30 dias de garantia após a entrega, cobrindo ajustes e correções sem custo adicional.' },
-  { q: 'Como funciona o suporte após a entrega?', a: 'Oferecemos planos de manutenção mensal a partir de R$ 49/mês, incluindo hospedagem, SSL, backups e suporte técnico contínuo.' },
+  { q: 'Como funciona o suporte após a entrega?', a: 'Oferecemos planos de manutenção mensal a partir de R$ 29/mês, incluindo hospedagem, SSL, backups e suporte técnico contínuo.' },
 ];
 
 export function FAQ() {

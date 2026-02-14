@@ -3,12 +3,12 @@ import { FileText, Globe, Sparkles, Megaphone, FilePlus, Shield } from 'lucide-r
 import { Badge } from '@/components/ui/badge';
 
 const services = [
-  { icon: FileText, title: 'Landing Page', desc: 'Página única focada em conversão com design profissional e otimizado para resultados.', price: 'A partir de R$ 997' },
-  { icon: Globe, title: 'Site Institucional', desc: 'Seu site profissional pronto em 7 dias com todas as páginas essenciais.', price: 'A partir de R$ 3.497', badge: 'MAIS VENDIDO' },
-  { icon: Sparkles, title: 'Site Premium', desc: 'Solução completa com integrações avançadas, animações e funcionalidades sob medida.', price: 'A partir de R$ 5.997' },
+  { icon: FileText, title: 'Landing Page', desc: 'Página única focada em conversão com design profissional e otimizado para resultados.', price: 'A partir de R$ 493' },
+  { icon: Globe, title: 'Site Institucional', desc: 'Seu site profissional pronto em 7 dias com todas as páginas essenciais.', price: 'A partir de R$ 897', badge: 'MAIS VENDIDO' },
+  { icon: Sparkles, title: 'Site Premium', desc: 'Solução completa com integrações avançadas, animações e funcionalidades sob medida.', price: 'A partir de R$ 1.997' },
   { icon: Megaphone, title: 'Site + Tráfego Pago', desc: 'Combo: site profissional + gestão de anúncios para maximizar seus resultados.', price: 'Sob consulta' },
-  { icon: FilePlus, title: 'Páginas Extras', desc: 'Adicione páginas conforme a necessidade do seu projeto.', price: 'R$ 297 por página' },
-  { icon: Shield, title: 'Manutenção Mensal', desc: 'Hospedagem, SSL, backups, atualizações e suporte técnico contínuo.', price: 'A partir de R$ 49/mês' },
+  { icon: FilePlus, title: 'Páginas Extras', desc: 'Adicione páginas conforme a necessidade do seu projeto.', price: 'R$ 97 por página' },
+  { icon: Shield, title: 'Manutenção Mensal', desc: 'Hospedagem, SSL, backups, atualizações e suporte técnico contínuo.', price: 'A partir de R$ 29/mês' },
 ];
 
 export function Services() {

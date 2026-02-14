@@ -4,12 +4,10 @@ import jtpWhite from "@/assets/jtp-white.png";
 
 export function Hero() {
   return (
-    // Ajuste aqui: 
-    // - Adicionado 'justify-start' para mobile (para respeitar o padding do topo)
-    // - Adicionado 'md:justify-center' para desktop (centralizar verticalmente)
-    // - Adicionado 'pt-32' (espaçamento extra no topo) para mobile
-    // - Adicionado 'md:pt-0' para remover esse espaçamento no desktop
-    <div className="relative flex min-h-screen flex-col items-center justify-start md:justify-center px-6 text-center pt-16 md:pt-0">
+    // Ajuste aqui:
+    // Adicionei 'pb-24' (padding bottom) para o mobile dar espaço para a seta
+    // Adicionei 'md:pb-0' para resetar esse espaço no desktop
+    <div className="relative flex min-h-screen flex-col items-center justify-start md:justify-center px-6 text-center pt-16 pb-24 md:pt-0 md:pb-0">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -117,7 +115,7 @@ export function Hero() {
           <div className="h-10 w-px bg-primary/20" />
           <div className="text-center">
             <p className="text-2xl sm:text-3xl font-bold text-foreground">
-              7 dias
+              4 dias
             </p>
             <p className="text-xs text-muted-foreground mt-1">Entrega</p>
           </div>

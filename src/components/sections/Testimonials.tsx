@@ -8,18 +8,45 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+// 1. Importe suas fotos aqui
+import fotoJonas from "@/assets/jonos-logo.png";
+import fotoGlobo from "@/assets/globo-sat-logo.png";
+import fotoOc from "@/assets/ouro-do-cerrado-logo.png";
+import fotoMad from "@/assets/madness-logo.png";
+// Exemplo: import fotoAna from "@/assets/foto-ana.png";
+
 const testimonials = [
-  { name: 'Carlos Silva', role: 'Empresário', text: 'Excelente trabalho! O site ficou incrível e já estamos recebendo muito mais contatos. Recomendo demais a JTP Services.', initials: 'CS' },
-  { name: 'Ana Rodrigues', role: 'Local Guide Google', text: 'Profissionalismo e agilidade. Entregaram antes do prazo e superaram todas as expectativas. Nota 10!', initials: 'AR' },
-  { name: 'Marcos Oliveira', role: 'CEO - Tech Solutions', text: 'Investimento que valeu cada centavo. Nosso faturamento aumentou 40% após o novo site. Parceria de longo prazo.', initials: 'MO' },
-  // Dupliquei os dados apenas para demonstrar o efeito de loop/carrossel se houver poucos itens, 
-  // você pode remover ou adicionar novos depoimentos reais aqui.
-  { name: 'Carlos Silva', role: 'Empresário', text: 'Excelente trabalho! O site ficou incrível e já estamos recebendo muito mais contatos. Recomendo demais a JTP Services.', initials: 'CS' },
+  { 
+    name: 'Marcos', 
+    role: 'CEO - Ouro do Cerrado Hotel', 
+    text: 'O site ficou sensacional! nossos clientes aumentaram em 40% no primeiro mês de lançamento,sem contar na facilidade na hora do agendamento.', 
+    image: fotoOc 
+  },
+  { 
+    name: 'Gabriel Jonas', 
+    role: 'Empresário-Barbeiro', 
+    text: 'Depois que lancei minha landing-page, minhas vendas aumentaram 30% em um mês!', 
+    // 2. Adicione a propriedade image aqui (pode remover initials se não for usar)
+    image: fotoJonas 
+  },
+  { 
+    name: 'Globo Sat Arinos', 
+    role: 'Empresa - Instalação de Antenas', 
+    text: 'A criação do nosso site trouxe muito mais visibilidade para a Globo Sat. Agora nossos clientes encontram nossos planos de internet e TV com facilidade.', 
+    // Se não tiver foto para todos, você pode criar uma lógica ou usar uma imagem padrão
+    image: fotoGlobo 
+  },
+  { 
+    name: 'Madness Clínica Veterinária', 
+    role: 'Clínica Veterinária', 
+    text: 'O site da clínica ficou incrível! Nossos clientes adoram a facilidade de agendamento online e a área do cliente. Já vimos um aumento significativo no número de consultas desde o lançamento.', 
+    image: fotoMad 
+  },
 ];
 
 export function Testimonials() {
   return (
-    <div className="py-24 px-6 select-none"> {/* select-none ajuda na experiência de arrastar */}
+    <div className="py-24 px-6 select-none">
       <div className="mx-auto max-w-6xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -56,9 +83,14 @@ export function Testimonials() {
                     </div>
                     <p className="text-sm text-muted-foreground flex-1 mb-6">"{t.text}"</p>
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary text-sm font-bold">
-                        {t.initials}
-                      </div>
+                      
+                      {/* 3. AQUI FOI A MUDANÇA: Usamos <img> em vez da <div> com iniciais */}
+                      <img 
+                        src={t.image} 
+                        alt={t.name} 
+                        className="h-10 w-10 rounded-full object-cover border border-primary/20" 
+                      />
+
                       <div>
                         <p className="text-sm font-medium">{t.name}</p>
                         <p className="text-xs text-muted-foreground">{t.role}</p>
@@ -69,7 +101,6 @@ export function Testimonials() {
               ))}
             </CarouselContent>
             
-            {/* Setas de navegação customizadas */}
             <div className="hidden md:block">
               <CarouselPrevious className="left-0 xl:-left-12 bg-background/20 hover:bg-background/40 border-primary/20 text-primary backdrop-blur-sm" />
               <CarouselNext className="right-0 xl:-right-12 bg-background/20 hover:bg-background/40 border-primary/20 text-primary backdrop-blur-sm" />

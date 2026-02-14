@@ -8,12 +8,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 
-const WHATSAPP_NUMBER = '5500000000000';
+const WHATSAPP_NUMBER = '38998304003';
 
 const plans = [
-  { id: 'landing' as const, name: 'Landing Page', pages: '1 página', price: 997, popular: false },
-  { id: 'institucional' as const, name: 'Site Institucional', pages: '6 páginas', price: 3497, popular: true },
-  { id: 'premium' as const, name: 'Site Premium', pages: '6+ páginas', price: 5997, popular: false },
+  { id: 'landing' as const, name: 'Landing Page (Página única)', pages: '1 página', price: 493, popular: false },
+  { id: 'institucional' as const, name: 'Site Institucional', pages: '6 páginas', price: 897, popular: true },
+  { id: 'premium' as const, name: 'Site Premium', pages: '6+ páginas', price: 1997, popular: false },
 ];
 
 type PlanId = typeof plans[number]['id'];
@@ -43,9 +43,9 @@ export function Budget() {
 
   const total = useMemo(() => {
     let sum = selectedPlan?.price || 0;
-    if (extraPages) sum += 297 * extraQty;
-    if (blog) sum += 497;
-    if (seo) sum += 1490;
+    if (extraPages) sum += 97 * extraQty; // Cálculo correto: 97
+    if (blog) sum += 297;
+    if (seo) sum += 490;
     return sum;
   }, [selectedPlan, extraPages, extraQty, blog, seo]);
 
@@ -55,9 +55,9 @@ export function Budget() {
       return;
     }
     const extras: string[] = [];
-    if (extraPages) extras.push(`Páginas extras: ${extraQty}x (${formatPrice(297 * extraQty)})`);
-    if (blog) extras.push('Blog/Portfólio (+R$ 497)');
-    if (seo) extras.push('SEO Avançado (+R$ 1.490)');
+    if (extraPages) extras.push(`Páginas extras: ${extraQty}x (${formatPrice(97 * extraQty)})`);
+    if (blog) extras.push('Blog/Portfólio (+R$ 297)');
+    if (seo) extras.push('SEO Avançado (+R$ 490)');
 
     const text = [
       `*Novo Orçamento - JTP Services*`,
@@ -65,7 +65,7 @@ export function Budget() {
       `*Plano:* ${selectedPlan?.name} (${formatPrice(selectedPlan?.price || 0)})`,
       extras.length ? `*Extras:* ${extras.join(', ')}` : '',
       `*Total setup:* ${formatPrice(total)}`,
-      maintenance ? `*Manutenção:* R$ 49/mês` : '*Manutenção:* Não inclusa',
+      maintenance ? `*Manutenção:* R$ 29/mês` : '*Manutenção:* Não inclusa',
       ``,
       `*Nome:* ${name}`,
       `*Email:* ${email}`,
@@ -141,16 +141,20 @@ export function Budget() {
           <div>
             <h3 className="text-sm font-semibold mb-4 text-muted-foreground uppercase tracking-wider">3. Extras (opcional)</h3>
             <div className="space-y-3">
-              <div className="flex items-center justify-between rounded-lg p-4" style={{ border: '1px solid rgba(40,126,215,0.15)' }}>
-                <div className="flex items-center gap-3">
-                  <Checkbox checked={extraPages} onCheckedChange={(c) => setExtraPages(!!c)} />
-                  <div>
-                    <p className="text-sm font-medium">Preciso de páginas extras</p>
-                    <p className="text-xs text-muted-foreground">R$ 297 por página adicional</p>
+              <div className="flex flex-col gap-3 rounded-lg p-4" style={{ border: '1px solid rgba(40,126,215,0.15)' }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Checkbox checked={extraPages} onCheckedChange={(c) => setExtraPages(!!c)} />
+                    <div>
+                      <p className="text-sm font-medium">Preciso de páginas extras</p>
+                      <p className="text-xs text-muted-foreground">R$ 97 por página adicional</p>
+                    </div>
                   </div>
                 </div>
+                
+                {/* AQUI FOI CORRIGIDO O VALOR DE EXIBIÇÃO PARA 97 */}
                 {extraPages && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 pl-9">
                     <button onClick={() => setExtraQty(Math.max(1, extraQty - 1))} className="h-7 w-7 rounded flex items-center justify-center hover:bg-primary/10" style={{ border: '1px solid rgba(40,126,215,0.2)' }}>
                       <Minus className="h-3 w-3" />
                     </button>
@@ -158,7 +162,7 @@ export function Budget() {
                     <button onClick={() => setExtraQty(Math.min(10, extraQty + 1))} className="h-7 w-7 rounded flex items-center justify-center hover:bg-primary/10" style={{ border: '1px solid rgba(40,126,215,0.2)' }}>
                       <Plus className="h-3 w-3" />
                     </button>
-                    <span className="text-xs text-primary ml-1">+{formatPrice(297 * extraQty)}</span>
+                    <span className="text-xs text-primary ml-1">+{formatPrice(97 * extraQty)}</span>
                   </div>
                 )}
               </div>
@@ -171,7 +175,7 @@ export function Budget() {
                     <p className="text-xs text-muted-foreground">Sistema de publicações</p>
                   </div>
                 </div>
-                <span className="text-xs text-primary">+R$ 497</span>
+                <span className="text-xs text-primary">+R$ 297</span>
               </div>
 
               <div className="flex items-center justify-between rounded-lg p-4" style={{ border: '1px solid rgba(40,126,215,0.15)' }}>
@@ -182,7 +186,7 @@ export function Budget() {
                     <p className="text-xs text-muted-foreground">Otimização para Google</p>
                   </div>
                 </div>
-                <span className="text-xs text-primary">+R$ 1.490</span>
+                <span className="text-xs text-primary">+R$ 490</span>
               </div>
             </div>
           </div>
@@ -192,7 +196,7 @@ export function Budget() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
               <span className="text-sm text-muted-foreground">Valor estimado:</span>
               <span className="text-xl font-bold">
-                {formatPrice(total)} setup{maintenance ? ' + R$ 49/mês' : ''}
+                {formatPrice(total)} setup{maintenance ? ' + R$ 29/mês' : ''}
               </span>
             </div>
             <div className="flex items-center justify-between">

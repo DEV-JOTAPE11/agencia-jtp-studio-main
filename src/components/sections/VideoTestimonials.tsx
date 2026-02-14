@@ -4,9 +4,9 @@ import { Play, ArrowRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const videos = [
-  { name: 'João Pedro', business: 'Clínica Estética', desc: 'Depoimento de cliente satisfeito' },
-  { name: 'Fernanda Lima', business: 'E-commerce Fashion', desc: 'Depoimento de cliente satisfeito' },
-  { name: 'Ricardo Santos', business: 'Escritório Advocacia', desc: 'Depoimento de cliente satisfeito' },
+  { name: 'XXXX', business: 'Clínica Estética', desc: 'AINDA NÃO TEMOS VIDEO DE DEPOIMENTOS' },
+  { name: 'XXXX', business: 'E-commerce Fashion', desc: 'AINDA NÃO TEMOS VIDEO DE DEPOIMENTOS' },
+  { name: 'XXXX', business: 'Escritório Advocacia', desc: 'AINDA NÃO TEMOS VIDEO DE DEPOIMENTOS' },
 ];
 
 export function VideoTestimonials() {
