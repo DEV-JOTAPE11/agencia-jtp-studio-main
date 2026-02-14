@@ -21,7 +21,8 @@ function FloatingPaths({ position }: { position: number }) {
           <motion.path
             key={path.id}
             d={path.d}
-            stroke="rgba(40,126,215,1)"
+            // ALTERADO: Cor da linha para um Azul Royal Elétrico mais futurista e vibrante
+            stroke="rgba(0, 85, 255, 1)" 
             strokeWidth={path.width}
             strokeOpacity={0.06 + path.id * 0.01}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
@@ -47,7 +48,8 @@ export function BackgroundPaths() {
     <>
       <FloatingPaths position={1} />
       <FloatingPaths position={-1} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(58,160,255,0.15),transparent_55%),radial-gradient(circle_at_20%_80%,rgba(40,126,215,0.12),transparent_60%)]" />
+      {/* ALTERADO: Gradientes de fundo para tons de "Deep Navy" e "Midnight Blue" */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(10,25,60,0.5),transparent_55%),radial-gradient(circle_at_20%_80%,rgba(0,40,100,0.3),transparent_60%)]" />
     </>
   );
 }
