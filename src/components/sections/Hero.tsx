@@ -4,7 +4,12 @@ import jtpWhite from "@/assets/jtp-white.png";
 
 export function Hero() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    // Ajuste aqui: 
+    // - Adicionado 'justify-start' para mobile (para respeitar o padding do topo)
+    // - Adicionado 'md:justify-center' para desktop (centralizar verticalmente)
+    // - Adicionado 'pt-32' (espaçamento extra no topo) para mobile
+    // - Adicionado 'md:pt-0' para remover esse espaçamento no desktop
+    <div className="relative flex min-h-screen flex-col items-center justify-start md:justify-center px-6 text-center pt-16 md:pt-0">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
