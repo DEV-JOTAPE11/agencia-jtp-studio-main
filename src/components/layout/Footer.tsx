@@ -24,10 +24,11 @@ export function Footer() {
 
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span>© 2026 JTP Services</span>
-          <a href="#" className="hover:text-primary transition-colors">Privacidade</a>
-          <a href="#" className="hover:text-primary transition-colors">Termos</a>
+          <a href="/politica-de-privacidade" className="hover:text-primary transition-colors">Privacidade</a>
+          <a href="/termos-de-uso" className="hover:text-primary transition-colors">Termos</a>
         </div>
       </div>
     </footer>
   );
 }
+
