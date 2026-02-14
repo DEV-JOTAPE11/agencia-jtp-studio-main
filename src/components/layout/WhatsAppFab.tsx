@@ -1,6 +1,6 @@
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon';
 
-const WHATSAPP_NUMBER = '+55SEUNUMEROAQUI';
+const WHATSAPP_NUMBER = '+5538998304003';
 
 export function WhatsAppFab() {
   return (
