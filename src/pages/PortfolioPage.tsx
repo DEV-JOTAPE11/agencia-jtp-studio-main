@@ -1,75 +1,83 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BackgroundPaths } from '@/components/ui/background-paths';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { WhatsAppFab } from '@/components/layout/WhatsAppFab';
 import { Footer } from '@/components/layout/Footer';
-import jtpLogo from '@/assets/logo-jtp-profissional.jpeg';
 
-// Dados dos projetos
+// Importação das imagens e logos
+import jtpLogo from '@/assets/logo-jtp-profissional.jpeg';
+import capaBarber from '@/assets/landing-page-barber-start.png';
+import capaVet from '@/assets/capa-vet.png';
+import capaOc from '@/assets/capa-oc.png';
+import capaPatins from '@/assets/landing-page-patins.png';
+import capaGlobo from '@/assets/capa-globo-sat-arinos.png';
+import capaJustly from '@/assets/justly-capa.png';
+
+// Dados dos projetos com Imagens Reais e Links Específicos
 const allProjects = [
   {
     id: 1,
-    title: 'Clínica Vitale',
+    title: 'Barber Start',
     category: 'Landing Page',
-    subCategory: 'Saúde',
-    desc: 'Landing page focada em conversão para clínica de estética com design premium.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop',
-    badges: ['Destaque', 'Alta Conversão'],
-    link: '#'
+    subCategory: 'Marketing Digital',
+    desc: 'Landing page moderna com alta conversão e design dark purple theme.',
+    image: capaBarber, // Imagem importada
+    badges: ['Alta Conversão', 'Design Premium'],
+    link: 'https://projeto-landing-page-jonas.vercel.app/' // Substitua pelo link real
   },
   {
     id: 2,
-    title: 'TechStore Pro',
-    category: 'E-commerce',
-    subCategory: 'Tecnologia',
-    desc: 'Loja virtual completa com integração de pagamentos e gestão de estoque.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
-    badges: ['Premium', 'Gestão Total'],
-    link: '#'
-  },
-  {
-    id: 3,
-    title: 'Advocacia Martins',
-    category: 'Institucional',
-    subCategory: 'Advocacia',
-    desc: 'Site profissional com agendamento online e área do cliente restrita.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=500&fit=crop',
-    badges: ['Case de Sucesso'],
-    link: '#'
-  },
-  {
-    id: 4,
-    title: 'Barbearia Viking',
-    category: 'Landing Page',
-    subCategory: 'Beleza',
-    desc: 'Página de captura para agendamentos com integração de calendário.',
-    image: 'https://images.unsplash.com/photo-1503951914875-452162b7f304?w=800&h=500&fit=crop',
-    badges: ['Agenda Online'],
-    link: '#'
-  },
-  {
-    id: 5,
     title: 'Ouro do Cerrado',
     category: 'Institucional',
     subCategory: 'Hotelaria',
-    desc: 'Site para hotel com sistema de reservas e galeria de quartos.',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=500&fit=crop',
-    badges: ['Reservas', 'Multilíngue'],
-    link: '#'
+    desc: 'Site institucional completo para facilitar reservas e divulgação do hotel.',
+    image: capaOc, // Imagem importada
+    badges: ['Sistema de Reservas', 'SEO'],
+    link: 'https://www.hotelourodocerrado.com.br' // Substitua pelo link real
+  },
+  {
+    id: 3,
+    title: 'Clínica Veterinária',
+    category: 'Institucional',
+    subCategory: 'Saúde',
+    desc: 'Site premium com objetivo de captar clientes e mostrar serviços da clínica.',
+    image: capaVet, // Imagem importada
+    badges: ['Captura de Leads', 'Clean Design'],
+    link: 'https://dev-jotape11.github.io/medneeds-fer/' // Substitua pelo link real
+  },
+  {
+    id: 4,
+    title: 'Globo Sat Arinos',
+    category: 'Institucional',
+    subCategory: 'Telecom',
+    desc: 'Portal para provedor de internet e TV com área de cobertura e planos.',
+    image: capaGlobo, // Imagem importada
+    badges: ['Velocidade', 'Institucional'],
+    link: 'https://www.globosatarinos.com.br' // Substitua pelo link real
+  },
+  {
+    id: 5,
+    title: 'Lp Patins',
+    category: 'Landing Page',
+    subCategory: 'Esportes',
+    desc: 'Landing page moderna e impactante para marca de patins.',
+    image: capaPatins, // Imagem importada
+    badges: ['Landing Page', 'Radical'],
+    link: 'https://dev-jotape11.github.io/lp-de-patins-animada-/' // Substitua pelo link real
   },
   {
     id: 6,
-    title: 'Burger House',
-    category: 'Landing Page',
-    subCategory: 'Alimentação',
-    desc: 'Cardápio digital interativo e sistema de pedidos via WhatsApp.',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&h=500&fit=crop',
-    badges: ['Delivery', 'QR Code'],
-    link: '#'
+    title: 'Justly Advogados',
+    category: 'Institucional',
+    subCategory: 'Jurídico',
+    desc: 'Site sóbrio e elegante transmitindo autoridade e confiança jurídica.',
+    image: capaJustly, // Imagem importada
+    badges: ['Corporativo', 'Sério'],
+    link: 'https://dev-jotape11.github.io/justly/' // Substitua pelo link real
   },
 ];
 
@@ -125,18 +133,16 @@ export default function PortfolioPage() {
         </div>
       </header>
 
-      {/* Conteúdo Principal com Espaçamento Mobile Ajustado */}
-      {/* Alterado pt-32 para pt-40 no mobile para dar mais respiro abaixo do header fixo */}
+      {/* Conteúdo Principal */}
       <main className="relative z-10 pt-40 md:pt-36 pb-16 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto flex-grow">
         
-        {/* Seção de Título Estilo Hero */}
+        {/* Seção de Título */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Margem top extra no mobile (mt-4) para garantir separação visual */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 mt-4 md:mt-0">
               Galeria de <span style={gradientStyle}>Sucesso</span>
             </h1>
@@ -153,44 +159,27 @@ export default function PortfolioPage() {
             className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 border-y border-primary/10 py-10"
           >
             <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>
-                R$ 493
-              </p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">
-                A partir de
-              </p>
+              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>R$ 493</p>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">A partir de</p>
             </div>
-            
             <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
-            
             <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>
-                7 dias
-              </p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">
-                Entrega Rápida
-              </p>
+              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>7 dias</p>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Entrega Rápida</p>
             </div>
-
             <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
-            
             <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>
-                10+
-              </p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">
-                Sites Criados
-              </p>
+              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>10+</p>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Sites Criados</p>
             </div>
           </motion.div>
         </div>
 
-        {/* Filtros com Contadores */}
+        {/* Filtros */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => {
             const isActive = filter === cat;
             const count = getCount(cat);
-            
             return (
               <Button
                 key={cat}
@@ -204,9 +193,7 @@ export default function PortfolioPage() {
               >
                 {cat}
                 <span className={`flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[10px] font-bold rounded-full transition-colors ${
-                  isActive 
-                    ? 'bg-background/20 text-primary-foreground' 
-                    : 'bg-primary/10 text-primary'
+                  isActive ? 'bg-background/20 text-primary-foreground' : 'bg-primary/10 text-primary'
                 }`}>
                   {count}
                 </span>
@@ -216,10 +203,7 @@ export default function PortfolioPage() {
         </div>
 
         {/* Grid de Projetos */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
@@ -229,9 +213,9 @@ export default function PortfolioPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300 flex flex-col h-full"
+                className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300 flex flex-col h-full bg-zinc-900/40 border-white/5"
               >
-                {/* Imagem */}
+                {/* Imagem do Card */}
                 <div className="relative aspect-video overflow-hidden">
                   <img 
                     src={project.image} 
@@ -239,9 +223,11 @@ export default function PortfolioPage() {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     loading="lazy" 
                   />
+                  {/* Overlay gradiente */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60" />
                   
-                  <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-20">
                     {project.badges.map(b => (
                       <Badge key={b} className="bg-primary/90 text-primary-foreground text-[10px] backdrop-blur-md shadow-lg border-0">
                         {b}
@@ -249,15 +235,22 @@ export default function PortfolioPage() {
                     ))}
                   </div>
 
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-                    <a href={project.link} className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform">
-                      Ver Projeto <ExternalLink className="h-4 w-4" />
+                  {/* Overlay Hover com Botão (Desktop) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-[2px] z-10">
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform"
+                    >
+                      <Globe className="h-4 w-4" />
+                      Visitar Site
                     </a>
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="p-5 flex flex-col flex-grow">
+                {/* Informações do Projeto */}
+                <div className="p-5 flex flex-col flex-grow relative z-20">
                   <div className="mb-2">
                     <h3 className="font-bold text-lg leading-tight group-hover:text-primary transition-colors">{project.title}</h3>
                     <div className="flex items-center gap-2 mt-1">
@@ -268,9 +261,15 @@ export default function PortfolioPage() {
                   </div>
                   <p className="text-sm text-muted-foreground line-clamp-2 mb-4 flex-grow">{project.desc}</p>
                   
+                  {/* Botão Visível apenas em Mobile */}
                   <div className="md:hidden mt-auto pt-4 border-t border-primary/10">
-                    <a href={project.link} className="flex items-center justify-center w-full gap-2 rounded-lg bg-primary/10 py-2 text-sm font-medium text-primary hover:bg-primary/20 transition-colors">
-                      Visitar Site <ExternalLink className="h-4 w-4" />
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-full gap-2 rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                    >
+                      Ver Projeto <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
                 </div>
