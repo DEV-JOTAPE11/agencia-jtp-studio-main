@@ -31,7 +31,7 @@ export function FAQ() {
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground mb-4">Pronto para criar seu site?</p>
           <a
-            href="#orcamento"
+            href="https://api.whatsapp.com/send?phone=5538998304003&text=Olá%20JTP%20Studio%2C%20quero%20saber%20mais%20sobre%20os%20planos%20de%20criação%20de%20sites!"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground glow-blue hover:glow-blue-strong transition-all hover:scale-105"
           >
             Criar Meu Site Agora

@@ -11,6 +11,8 @@ import { VideoTestimonials } from '@/components/sections/VideoTestimonials';
 import { Budget } from '@/components/sections/Budget';
 import { FAQ } from '@/components/sections/FAQ';
 
+const SHOW_VIDEO_TESTIMONIALS = false;
+
 const Index = () => {
   return (
     <div className="relative min-h-screen">
@@ -37,9 +39,11 @@ const Index = () => {
         <section id="depoimentos">
           <Testimonials />
         </section>
-        <section id="videos">
-          <VideoTestimonials />
-        </section>
+       {SHOW_VIDEO_TESTIMONIALS && (
+          <section id="videos">
+            <VideoTestimonials />
+          </section>
+        )}
         <section id="orcamento">
           <Budget />
         </section>
