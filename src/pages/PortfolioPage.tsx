@@ -151,28 +151,6 @@ export default function PortfolioPage() {
             </p>
           </motion.div>
 
-          {/* Seção de Estatísticas */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 border-y border-primary/10 py-10"
-          >
-            <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>100%</p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Clientes Satisfeitos</p>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
-            <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>7 dias</p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Entrega Rápida</p>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
-            <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>10+</p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Sites Criados</p>
-            </div>
-          </motion.div>
         </div>
 
         {/* Filtros */}
@@ -209,11 +187,11 @@ export default function PortfolioPage() {
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300 flex flex-col h-full bg-zinc-900/40 border-white/5"
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
+                className="glass-card overflow-hidden group hover:border-primary/30 transition-colors duration-300 flex flex-col h-full bg-zinc-900/40 border-white/5"
               >
                 {/* Imagem do Card */}
                 <div className="relative aspect-video overflow-hidden">
