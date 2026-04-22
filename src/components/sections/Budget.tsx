@@ -11,14 +11,12 @@ import { Badge } from '@/components/ui/badge';
 const WHATSAPP_NUMBER = '38998304003';
 
 const plans = [
-  { id: 'landing' as const, name: 'Landing Page (Página única)', pages: '1 página', price: 493, popular: false },
-  { id: 'institucional' as const, name: 'Site Institucional', pages: '6 páginas', price: 897, popular: true },
-  { id: 'premium' as const, name: 'Site Premium', pages: '6+ páginas', price: 1997, popular: false },
+  { id: 'landing' as const, name: 'Landing Page (Página única)', pages: '1 página', popular: false },
+  { id: 'institucional' as const, name: 'Site Institucional', pages: '6 páginas', popular: true },
+  { id: 'premium' as const, name: 'Site Premium', pages: '6+ páginas', popular: false },
 ];
 
 type PlanId = typeof plans[number]['id'];
-
-const formatPrice = (v: number) => `R$ ${v.toLocaleString('pt-BR')}`;
 
 const formatPhone = (value: string) => {
   const d = value.replace(/\D/g, '').slice(0, 11);
@@ -41,31 +39,22 @@ export function Budget() {
 
   const selectedPlan = plans.find(p => p.id === plan);
 
-  const total = useMemo(() => {
-    let sum = selectedPlan?.price || 0;
-    if (extraPages) sum += 97 * extraQty; // Cálculo correto: 97
-    if (blog) sum += 297;
-    if (seo) sum += 490;
-    return sum;
-  }, [selectedPlan, extraPages, extraQty, blog, seo]);
-
   const handleSubmit = () => {
     if (!plan || !name || !email || !phone) {
       alert('Preencha todos os campos obrigatórios.');
       return;
     }
     const extras: string[] = [];
-    if (extraPages) extras.push(`Páginas extras: ${extraQty}x (${formatPrice(97 * extraQty)})`);
-    if (blog) extras.push('Blog/Portfólio (+R$ 297)');
-    if (seo) extras.push('SEO Avançado (+R$ 490)');
+    if (extraPages) extras.push(`Páginas extras: ${extraQty}x`);
+    if (blog) extras.push('Blog/Portfólio');
+    if (seo) extras.push('SEO Avançado');
 
     const text = [
       `*Novo Orçamento - JTP Services*`,
       ``,
-      `*Plano:* ${selectedPlan?.name} (${formatPrice(selectedPlan?.price || 0)})`,
+      `*Plano:* ${selectedPlan?.name}`,
       extras.length ? `*Extras:* ${extras.join(', ')}` : '',
-      `*Total setup:* ${formatPrice(total)}`,
-      maintenance ? `*Manutenção:* R$ 29/mês` : '*Manutenção:* Não inclusa',
+      maintenance ? `*Manutenção:* Inclusa` : '*Manutenção:* Não inclusa',
       ``,
       `*Nome:* ${name}`,
       `*Email:* ${email}`,
@@ -108,7 +97,6 @@ export function Budget() {
                   {p.popular && <Badge className="mb-2 bg-primary/20 text-primary border-primary/30 text-[10px]">Popular</Badge>}
                   <p className="font-semibold text-sm">{p.name}</p>
                   <p className="text-xs text-muted-foreground">{p.pages}</p>
-                  <p className="text-sm font-bold text-primary mt-2">{formatPrice(p.price)}</p>
                 </button>
               ))}
             </div>
@@ -147,7 +135,7 @@ export function Budget() {
                     <Checkbox checked={extraPages} onCheckedChange={(c) => setExtraPages(!!c)} />
                     <div>
                       <p className="text-sm font-medium">Preciso de páginas extras</p>
-                      <p className="text-xs text-muted-foreground">R$ 97 por página adicional</p>
+                      <p className="text-xs text-muted-foreground">Selecione a quantidade de páginas adicionais</p>
                     </div>
                   </div>
                 </div>
@@ -162,7 +150,6 @@ export function Budget() {
                     <button onClick={() => setExtraQty(Math.min(10, extraQty + 1))} className="h-7 w-7 rounded flex items-center justify-center hover:bg-primary/10" style={{ border: '1px solid rgba(40,126,215,0.2)' }}>
                       <Plus className="h-3 w-3" />
                     </button>
-                    <span className="text-xs text-primary ml-1">+{formatPrice(97 * extraQty)}</span>
                   </div>
                 )}
               </div>
@@ -175,7 +162,6 @@ export function Budget() {
                     <p className="text-xs text-muted-foreground">Sistema de publicações</p>
                   </div>
                 </div>
-                <span className="text-xs text-primary">+R$ 297</span>
               </div>
 
               <div className="flex items-center justify-between rounded-lg p-4" style={{ border: '1px solid rgba(40,126,215,0.15)' }}>
@@ -186,7 +172,6 @@ export function Budget() {
                     <p className="text-xs text-muted-foreground">Otimização para Google</p>
                   </div>
                 </div>
-                <span className="text-xs text-primary">+R$ 490</span>
               </div>
             </div>
           </div>
@@ -194,9 +179,9 @@ export function Budget() {
           {/* Summary */}
           <div className="rounded-xl bg-background/50 p-5" style={{ border: '1px solid rgba(40,126,215,0.15)' }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
-              <span className="text-sm text-muted-foreground">Valor estimado:</span>
-              <span className="text-xl font-bold">
-                {formatPrice(total)} setup{maintenance ? ' + R$ 29/mês' : ''}
+              <span className="text-sm text-muted-foreground">Seu projeto ideal:</span>
+              <span className="text-xl font-bold text-primary">
+                Proposta Personalizada
               </span>
             </div>
             <div className="flex items-center justify-between">

@@ -159,8 +159,8 @@ export default function PortfolioPage() {
             className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 border-y border-primary/10 py-10"
           >
             <div className="text-center group">
-              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>R$ 493</p>
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">A partir de</p>
+              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold" style={gradientStyle}>100%</p>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-2 group-hover:text-primary transition-colors">Clientes Satisfeitos</p>
             </div>
             <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
             <div className="text-center group">

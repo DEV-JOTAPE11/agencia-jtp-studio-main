@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 
 function FloatingPaths({ position }: { position: number }) {
@@ -43,7 +44,7 @@ function FloatingPaths({ position }: { position: number }) {
   );
 }
 
-export function BackgroundPaths() {
+export const BackgroundPaths = memo(function BackgroundPaths() {
   return (
     <>
       <FloatingPaths position={1} />
@@ -52,4 +53,4 @@ export function BackgroundPaths() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(10,25,60,0.5),transparent_55%),radial-gradient(circle_at_20%_80%,rgba(0,40,100,0.3),transparent_60%)]" />
     </>
   );
-}
+});

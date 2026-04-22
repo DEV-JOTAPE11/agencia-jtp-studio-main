@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Star } from "lucide-react";
+import { ArrowDown, Star, ArrowUpRight } from "lucide-react";
 import jtpWhite from "@/assets/jtp-white.png";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export function Hero() {
   return (
@@ -82,19 +83,21 @@ export function Hero() {
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#orcamento"
-            className="inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold text-white glow-blue transition-all hover:glow-blue-strong hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-sm font-semibold text-white glow-blue transition-all hover:glow-blue-strong hover:scale-105"
             style={{
               background:
                 "linear-gradient(90deg, rgb(75, 108, 183) 0%, rgb(24, 40, 72) 100%)",
             }}
           >
+            <WhatsAppIcon className="h-5 w-5" />
             Solicitar Orçamento
           </a>
           <a
             href="#servicos"
-            className="inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold text-foreground transition-all hover:bg-primary/5"
+            className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-sm font-semibold text-foreground transition-all hover:bg-primary/5"
             style={{ border: "1px solid rgba(40,126,215,0.25)" }}
           >
+            <ArrowUpRight className="h-4 w-4" />
             Ver Serviços
           </a>
         </div>
@@ -108,9 +111,9 @@ export function Hero() {
         >
           <div className="text-center">
             <p className="text-2xl sm:text-3xl font-bold text-foreground">
-              R$493
+              100%
             </p>
-            <p className="text-xs text-muted-foreground mt-1">A partir de</p>
+            <p className="text-xs text-muted-foreground mt-1">Foco em Conversão</p>
           </div>
           <div className="h-10 w-px bg-primary/20" />
           <div className="text-center">
