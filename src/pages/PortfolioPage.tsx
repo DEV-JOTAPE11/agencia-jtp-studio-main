@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -85,6 +85,10 @@ const categories = ['Todos', 'Landing Page', 'Institucional', 'E-commerce'];
 
 export default function PortfolioPage() {
   const [filter, setFilter] = useState('Todos');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Lógica de filtragem
   const filteredProjects = allProjects.filter(project => 
