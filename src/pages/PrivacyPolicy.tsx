@@ -153,13 +153,12 @@ export default function PrivacyPolicy() {
                   jtp.servicesagencia@gmail.com
                 </a>
                 <a 
-                  href="https://wa.me/5538998304003" 
+                  href="https://wa.me/553899743350" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors w-fit"
                 >
-                  {/* Ícone de telefone genérico ou WhatsApp se tiver o ícone específico no projeto */}
-                  <span className="font-bold">WhatsApp:</span> (38) 99830-4003
+                  <span className="font-bold">WhatsApp:</span> +55 38 9974-3350
                 </a>
               </div>
             </div>

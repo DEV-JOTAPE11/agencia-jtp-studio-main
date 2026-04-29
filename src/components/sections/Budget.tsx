@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 
-const WHATSAPP_NUMBER = '38998304003';
+const WHATSAPP_NUMBER = '553899743350';
 
 const plans = [
   { id: 'landing' as const, name: 'Landing Page (Página única)', pages: '1 página', popular: false },
