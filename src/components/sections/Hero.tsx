@@ -116,8 +116,8 @@ export function Hero() {
             <p className="text-xs text-muted-foreground mt-1">Foco em Conversão</p>
           </div>
           <div className="h-10 w-px bg-primary/20" />
-          <div className="text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-foreground">
+          <div className="min-w-[74px] text-center">
+            <p className="whitespace-nowrap text-2xl sm:text-3xl font-bold leading-none text-foreground">
               4 dias
             </p>
             <p className="text-xs text-muted-foreground mt-1">Entrega</p>

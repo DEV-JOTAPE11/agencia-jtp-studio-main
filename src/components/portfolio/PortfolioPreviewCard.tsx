@@ -1,5 +1,5 @@
 import {
-  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useRef,
@@ -21,62 +21,54 @@ export function PortfolioPreviewCard({
   project,
   variant = "portfolio",
 }: PortfolioPreviewCardProps) {
-  const frameRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
   const [imageSrc, setImageSrc] = useState(project.previewImage);
-  const [hovered, setHovered] = useState(false);
-  const [canAutoScroll, setCanAutoScroll] = useState(false);
-  const [scrollDistance, setScrollDistance] = useState(0);
-
-  const measureScrollDistance = useCallback(() => {
-    const frameHeight = frameRef.current?.clientHeight ?? 0;
-    const imageHeight = imageRef.current?.scrollHeight ?? 0;
-
-    setScrollDistance(Math.max(0, imageHeight - frameHeight));
-  }, []);
+  const [scrollState, setScrollState] = useState({
+    clientHeight: 1,
+    scrollHeight: 1,
+    scrollTop: 0,
+  });
 
   useEffect(() => {
     setImageSrc(project.previewImage);
-    setHovered(false);
   }, [project.previewImage]);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateAutoScroll = () =>
-      setCanAutoScroll(mediaQuery.matches && !reducedMotion.matches);
+  const updateScrollState = useCallback(() => {
+    const scrollArea = scrollAreaRef.current;
+    if (!scrollArea) return;
 
-    updateAutoScroll();
-    mediaQuery.addEventListener("change", updateAutoScroll);
-    reducedMotion.addEventListener("change", updateAutoScroll);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateAutoScroll);
-      reducedMotion.removeEventListener("change", updateAutoScroll);
-    };
+    setScrollState({
+      clientHeight: scrollArea.clientHeight,
+      scrollHeight: scrollArea.scrollHeight,
+      scrollTop: scrollArea.scrollTop,
+    });
   }, []);
 
   useEffect(() => {
-    measureScrollDistance();
+    updateScrollState();
 
-    const frame = frameRef.current;
-    const image = imageRef.current;
+    const scrollArea = scrollAreaRef.current;
 
-    if (!frame || !image || typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", measureScrollDistance);
-      return () => window.removeEventListener("resize", measureScrollDistance);
+    if (!scrollArea || typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateScrollState);
+      return () => window.removeEventListener("resize", updateScrollState);
     }
 
-    const observer = new ResizeObserver(measureScrollDistance);
-    observer.observe(frame);
-    observer.observe(image);
-    window.addEventListener("resize", measureScrollDistance);
+    const observer = new ResizeObserver(updateScrollState);
+    observer.observe(scrollArea);
+
+    Array.from(scrollArea.children).forEach((child) => {
+      observer.observe(child);
+    });
+
+    window.addEventListener("resize", updateScrollState);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", measureScrollDistance);
+      window.removeEventListener("resize", updateScrollState);
     };
-  }, [imageSrc, measureScrollDistance]);
+  }, [imageSrc, updateScrollState]);
 
   const handleImageError = () => {
     setImageSrc((currentSrc) =>
@@ -85,65 +77,115 @@ export function PortfolioPreviewCard({
   };
 
   const handleImageLoad = () => {
-    requestAnimationFrame(measureScrollDistance);
+    requestAnimationFrame(updateScrollState);
   };
 
-  const transitionDuration = Math.min(
-    10,
-    Math.max(5, scrollDistance / 180)
-  );
+  const scrollToPointerPosition = useCallback((clientY: number) => {
+    const scrollArea = scrollAreaRef.current;
+    const track = scrollTrackRef.current;
+    if (!scrollArea || !track) return;
+
+    const rect = track.getBoundingClientRect();
+    const maxScrollTop = scrollArea.scrollHeight - scrollArea.clientHeight;
+    const thumbHeightPx = Math.max(
+      28,
+      rect.height * (scrollArea.clientHeight / scrollArea.scrollHeight)
+    );
+    const availableTrack = Math.max(1, rect.height - thumbHeightPx);
+    const pointerY = clientY - rect.top - thumbHeightPx / 2;
+    const nextRatio = Math.min(Math.max(pointerY / availableTrack, 0), 1);
+
+    scrollArea.scrollTop = nextRatio * maxScrollTop;
+  }, []);
+
+  const handleScrollThumbPointerDown = (
+    event: ReactPointerEvent<HTMLDivElement>
+  ) => {
+    event.preventDefault();
+    scrollToPointerPosition(event.clientY);
+
+    const handlePointerMove = (moveEvent: PointerEvent) => {
+      scrollToPointerPosition(moveEvent.clientY);
+    };
+
+    const handlePointerUp = () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+  };
+
   const isUsingFallbackImage = imageSrc === project.coverImage;
-
-  const imageStyle: CSSProperties = {
-    transform:
-      canAutoScroll && hovered && scrollDistance > 0
-        ? `translate3d(0, -${scrollDistance}px, 0)`
-        : "translate3d(0, 0, 0)",
-    transitionDuration: `${transitionDuration}s`,
-  };
-
-  const frameStyle: CSSProperties = {
-    overscrollBehavior: "contain",
-    WebkitOverflowScrolling: "touch",
-  };
+  const maxScrollTop = Math.max(
+    0,
+    scrollState.scrollHeight - scrollState.clientHeight
+  );
+  const canScroll = maxScrollTop > 4;
+  const thumbHeight = Math.max(
+    18,
+    Math.min(100, (scrollState.clientHeight / scrollState.scrollHeight) * 100)
+  );
+  const thumbTop =
+    maxScrollTop > 0
+      ? (scrollState.scrollTop / maxScrollTop) * (100 - thumbHeight)
+      : 0;
 
   return (
     <article
       className={cn(
         "glass-card group flex h-full flex-col overflow-hidden bg-card/55 transition-all duration-300",
         "hover:-translate-y-1 hover:border-primary/35 hover:shadow-2xl hover:shadow-primary/10",
-        variant === "home" ? "min-h-[560px]" : "min-h-[580px]"
+        variant === "home" ? "min-h-[500px]" : "min-h-[520px]"
       )}
     >
       <div className="p-3 pb-0">
-        <div
-          className={cn(
-            "overflow-hidden rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
-            canAutoScroll ? "overflow-hidden" : "overflow-y-auto",
-            variant === "home"
-              ? "h-[300px] sm:h-[340px] lg:h-[360px]"
-              : "h-[320px] sm:h-[360px] lg:h-[380px]"
-          )}
-          ref={frameRef}
-          style={frameStyle}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          <img
-            ref={imageRef}
-            src={imageSrc}
-            alt={`Preview completo do site ${project.title}`}
+        <div className="relative">
+          <div
+            ref={scrollAreaRef}
             className={cn(
-              "block w-full select-none transition-transform ease-in-out will-change-transform",
-              isUsingFallbackImage && "h-full object-cover"
+              "portfolio-preview-scrollbar overflow-y-auto rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
+              "touch-pan-y overscroll-contain focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
+              variant === "home"
+                ? "h-[260px] sm:h-[300px] lg:h-[320px]"
+                : "h-[280px] sm:h-[320px] lg:h-[340px]"
             )}
-            style={imageStyle}
-            draggable={false}
-            loading="lazy"
-            decoding="async"
-            onError={handleImageError}
-            onLoad={handleImageLoad}
-          />
+            tabIndex={0}
+            aria-label={`Preview rolavel do site ${project.title}`}
+            onScroll={updateScrollState}
+          >
+            <img
+              src={imageSrc}
+              alt={`Preview completo do site ${project.title}`}
+              className={cn(
+                "block w-full select-none",
+                isUsingFallbackImage && "h-full object-cover"
+              )}
+              draggable={false}
+              loading="lazy"
+              decoding="async"
+              onError={handleImageError}
+              onLoad={handleImageLoad}
+            />
+          </div>
+
+          {canScroll && (
+            <div
+              ref={scrollTrackRef}
+              aria-hidden="true"
+              className="absolute bottom-3 right-2 top-3 z-10 w-3 rounded-full border border-primary/15 bg-background/70 p-[2px] shadow-lg shadow-black/30 backdrop-blur-md md:hidden"
+              onPointerDown={handleScrollThumbPointerDown}
+            >
+              <div
+                className="absolute left-[2px] right-[2px] rounded-full bg-gradient-to-b from-accent to-primary shadow-[0_0_14px_rgba(58,160,255,0.35)]"
+                style={{
+                  height: `${thumbHeight}%`,
+                  top: `${thumbTop}%`,
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
 
