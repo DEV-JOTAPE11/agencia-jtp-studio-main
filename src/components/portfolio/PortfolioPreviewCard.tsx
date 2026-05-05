@@ -1,10 +1,4 @@
-import {
-  type PointerEvent as ReactPointerEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -21,54 +15,11 @@ export function PortfolioPreviewCard({
   project,
   variant = "portfolio",
 }: PortfolioPreviewCardProps) {
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const scrollTrackRef = useRef<HTMLDivElement>(null);
   const [imageSrc, setImageSrc] = useState(project.previewImage);
-  const [scrollState, setScrollState] = useState({
-    clientHeight: 1,
-    scrollHeight: 1,
-    scrollTop: 0,
-  });
 
   useEffect(() => {
     setImageSrc(project.previewImage);
   }, [project.previewImage]);
-
-  const updateScrollState = useCallback(() => {
-    const scrollArea = scrollAreaRef.current;
-    if (!scrollArea) return;
-
-    setScrollState({
-      clientHeight: scrollArea.clientHeight,
-      scrollHeight: scrollArea.scrollHeight,
-      scrollTop: scrollArea.scrollTop,
-    });
-  }, []);
-
-  useEffect(() => {
-    updateScrollState();
-
-    const scrollArea = scrollAreaRef.current;
-
-    if (!scrollArea || typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", updateScrollState);
-      return () => window.removeEventListener("resize", updateScrollState);
-    }
-
-    const observer = new ResizeObserver(updateScrollState);
-    observer.observe(scrollArea);
-
-    Array.from(scrollArea.children).forEach((child) => {
-      observer.observe(child);
-    });
-
-    window.addEventListener("resize", updateScrollState);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", updateScrollState);
-    };
-  }, [imageSrc, updateScrollState]);
 
   const handleImageError = () => {
     setImageSrc((currentSrc) =>
@@ -76,61 +27,7 @@ export function PortfolioPreviewCard({
     );
   };
 
-  const handleImageLoad = () => {
-    requestAnimationFrame(updateScrollState);
-  };
-
-  const scrollToPointerPosition = useCallback((clientY: number) => {
-    const scrollArea = scrollAreaRef.current;
-    const track = scrollTrackRef.current;
-    if (!scrollArea || !track) return;
-
-    const rect = track.getBoundingClientRect();
-    const maxScrollTop = scrollArea.scrollHeight - scrollArea.clientHeight;
-    const thumbHeightPx = Math.max(
-      28,
-      rect.height * (scrollArea.clientHeight / scrollArea.scrollHeight)
-    );
-    const availableTrack = Math.max(1, rect.height - thumbHeightPx);
-    const pointerY = clientY - rect.top - thumbHeightPx / 2;
-    const nextRatio = Math.min(Math.max(pointerY / availableTrack, 0), 1);
-
-    scrollArea.scrollTop = nextRatio * maxScrollTop;
-  }, []);
-
-  const handleScrollThumbPointerDown = (
-    event: ReactPointerEvent<HTMLDivElement>
-  ) => {
-    event.preventDefault();
-    scrollToPointerPosition(event.clientY);
-
-    const handlePointerMove = (moveEvent: PointerEvent) => {
-      scrollToPointerPosition(moveEvent.clientY);
-    };
-
-    const handlePointerUp = () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
-    };
-
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerup", handlePointerUp);
-  };
-
   const isUsingFallbackImage = imageSrc === project.coverImage;
-  const maxScrollTop = Math.max(
-    0,
-    scrollState.scrollHeight - scrollState.clientHeight
-  );
-  const canScroll = maxScrollTop > 4;
-  const thumbHeight = Math.max(
-    18,
-    Math.min(100, (scrollState.clientHeight / scrollState.scrollHeight) * 100)
-  );
-  const thumbTop =
-    maxScrollTop > 0
-      ? (scrollState.scrollTop / maxScrollTop) * (100 - thumbHeight)
-      : 0;
 
   return (
     <article
@@ -141,51 +38,29 @@ export function PortfolioPreviewCard({
       )}
     >
       <div className="p-3 pb-0">
-        <div className="relative">
-          <div
-            ref={scrollAreaRef}
-            className={cn(
-              "portfolio-preview-scrollbar overflow-y-auto rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
-              "touch-pan-y overscroll-contain focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
-              variant === "home"
-                ? "h-[260px] sm:h-[300px] lg:h-[320px]"
-                : "h-[280px] sm:h-[320px] lg:h-[340px]"
-            )}
-            tabIndex={0}
-            aria-label={`Preview rolavel do site ${project.title}`}
-            onScroll={updateScrollState}
-          >
-            <img
-              src={imageSrc}
-              alt={`Preview completo do site ${project.title}`}
-              className={cn(
-                "block w-full select-none",
-                isUsingFallbackImage && "h-full object-cover"
-              )}
-              draggable={false}
-              loading="lazy"
-              decoding="async"
-              onError={handleImageError}
-              onLoad={handleImageLoad}
-            />
-          </div>
-
-          {canScroll && (
-            <div
-              ref={scrollTrackRef}
-              aria-hidden="true"
-              className="absolute bottom-3 right-2 top-3 z-10 w-3 rounded-full border border-primary/15 bg-background/70 p-[2px] shadow-lg shadow-black/30 backdrop-blur-md md:hidden"
-              onPointerDown={handleScrollThumbPointerDown}
-            >
-              <div
-                className="absolute left-[2px] right-[2px] rounded-full bg-gradient-to-b from-accent to-primary shadow-[0_0_14px_rgba(58,160,255,0.35)]"
-                style={{
-                  height: `${thumbHeight}%`,
-                  top: `${thumbTop}%`,
-                }}
-              />
-            </div>
+        <div
+          className={cn(
+            "portfolio-preview-scrollbar overflow-x-hidden overflow-y-auto rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
+            "touch-pan-y overscroll-contain focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
+            variant === "home"
+              ? "h-[260px] sm:h-[300px] lg:h-[320px]"
+              : "h-[280px] sm:h-[320px] lg:h-[340px]"
           )}
+          tabIndex={0}
+          aria-label={`Preview rolavel do site ${project.title}`}
+        >
+          <img
+            src={imageSrc}
+            alt={`Preview completo do site ${project.title}`}
+            className={cn(
+              "block w-full select-none",
+              isUsingFallbackImage && "h-full object-cover"
+            )}
+            draggable={false}
+            loading="lazy"
+            decoding="async"
+            onError={handleImageError}
+          />
         </div>
       </div>
 

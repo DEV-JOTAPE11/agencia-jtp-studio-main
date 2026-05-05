@@ -85,7 +85,9 @@
     scrollbar-color: hsl(var(--primary)) rgba(7, 20, 39, 0.72);
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
+    overflow-x: hidden;
     overscroll-behavior: contain;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
   }
 
