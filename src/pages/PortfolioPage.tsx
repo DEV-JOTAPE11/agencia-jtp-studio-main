@@ -1,107 +1,36 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { BackgroundPaths } from '@/components/ui/background-paths';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { WhatsAppFab } from '@/components/layout/WhatsAppFab';
-import { Footer } from '@/components/layout/Footer';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
-// Importação das imagens e logos
-import jtpLogo from '@/assets/logo-jtp-profissional.jpeg';
-import capaBarber from '@/assets/landing-page-barber-start.png';
-import capaVet from '@/assets/capa-vet.png';
-import capaOc from '@/assets/capa-oc.png';
-import capaPatins from '@/assets/landing-page-patins.png';
-import capaGlobo from '@/assets/capa-globo-sat-arinos.png';
-import capaJustly from '@/assets/justly-capa.png';
+import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import { Footer } from "@/components/layout/Footer";
+import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
+import { BackgroundPaths } from "@/components/ui/background-paths";
+import { Button } from "@/components/ui/button";
+import { portfolioProjects } from "@/data/portfolioProjects";
 
-// Dados dos projetos com Imagens Reais e Links Específicos
-const allProjects = [
-  {
-    id: 1,
-    title: 'Barber Start',
-    category: 'Landing Page',
-    subCategory: 'Marketing Digital',
-    desc: 'Landing page moderna com alta conversão e design dark purple theme.',
-    image: capaBarber, // Imagem importada
-    badges: ['Alta Conversão', 'Design Premium'],
-    link: 'https://projeto-landing-page-jonas.vercel.app/' // Substitua pelo link real
-  },
-  {
-    id: 2,
-    title: 'Ouro do Cerrado',
-    category: 'Institucional',
-    subCategory: 'Hotelaria',
-    desc: 'Site institucional completo para facilitar reservas e divulgação do hotel.',
-    image: capaOc, // Imagem importada
-    badges: ['Sistema de Reservas', 'SEO'],
-    link: 'https://www.hotelourodocerrado.com.br' // Substitua pelo link real
-  },
-  {
-    id: 3,
-    title: 'Clínica Veterinária',
-    category: 'Institucional',
-    subCategory: 'Saúde',
-    desc: 'Site premium com objetivo de captar clientes e mostrar serviços da clínica.',
-    image: capaVet, // Imagem importada
-    badges: ['Captura de Leads', 'Clean Design'],
-    link: 'https://dev-jotape11.github.io/medneeds-fer/' // Substitua pelo link real
-  },
-  {
-    id: 4,
-    title: 'Globo Sat Arinos',
-    category: 'Institucional',
-    subCategory: 'Telecom',
-    desc: 'Portal para provedor de internet e TV com área de cobertura e planos.',
-    image: capaGlobo, // Imagem importada
-    badges: ['Velocidade', 'Institucional'],
-    link: 'https://www.globosatarinos.com.br' // Substitua pelo link real
-  },
-  {
-    id: 5,
-    title: 'Lp Patins',
-    category: 'Landing Page',
-    subCategory: 'Esportes',
-    desc: 'Landing page moderna e impactante para marca de patins.',
-    image: capaPatins, // Imagem importada
-    badges: ['Landing Page', 'Radical'],
-    link: 'https://dev-jotape11.github.io/lp-de-patins-animada-/' // Substitua pelo link real
-  },
-  {
-    id: 6,
-    title: 'Justly Advogados',
-    category: 'Institucional',
-    subCategory: 'Jurídico',
-    desc: 'Site sóbrio e elegante transmitindo autoridade e confiança jurídica.',
-    image: capaJustly, // Imagem importada
-    badges: ['Corporativo', 'Sério'],
-    link: 'https://dev-jotape11.github.io/justly/' // Substitua pelo link real
-  },
-];
+import jtpLogo from "@/assets/logo-jtp-profissional.jpeg";
 
-const categories = ['Todos', 'Landing Page', 'Institucional', 'E-commerce'];
+const categories = ["Todos", "Landing Page", "Institucional", "E-commerce"];
 
 export default function PortfolioPage() {
-  const [filter, setFilter] = useState('Todos');
+  const [filter, setFilter] = useState("Todos");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Lógica de filtragem
-  const filteredProjects = allProjects.filter(project => 
-    filter === 'Todos' ? true : project.category === filter
+  const filteredProjects = portfolioProjects.filter((project) =>
+    filter === "Todos" ? true : project.category === filter
   );
 
-  // Função para contar
-  const getCount = (cat: string) => {
-    if (cat === 'Todos') return allProjects.length;
-    return allProjects.filter(p => p.category === cat).length;
+  const getCount = (category: string) => {
+    if (category === "Todos") return portfolioProjects.length;
+    return portfolioProjects.filter((project) => project.category === category)
+      .length;
   };
 
-  // Estilo Gradiente
   const gradientStyle = {
     background: "linear-gradient(90deg, #b2fefa 0%, #004b8e 100%)",
     WebkitBackgroundClip: "text",
@@ -110,73 +39,75 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background flex flex-col">
-      {/* Background Animado Fixo */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div className="relative flex min-h-screen flex-col bg-background">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <BackgroundPaths />
       </div>
 
-      {/* Header Fixo */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-primary/15 bg-background/80 backdrop-blur-xl px-4 md:px-8">
+      <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b border-primary/15 bg-background/80 px-4 backdrop-blur-xl md:px-8">
         <div className="flex items-center gap-4">
-          <Link 
-            to="/" 
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-            title="Voltar para o início"
+          <Link
+            to="/"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
+            title={"Voltar para o in\u00edcio"}
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="flex items-center gap-2">
-            <img 
-              src={jtpLogo} 
-              alt="JTP Services" 
-              className="h-8 w-8 rounded-lg object-cover shadow-lg shadow-blue-500/20" 
+            <img
+              src={jtpLogo}
+              alt="JTP Services"
+              className="h-8 w-8 rounded-lg object-cover shadow-lg shadow-primary/20"
             />
-            <span className="font-semibold text-sm tracking-wide">Portfólio Completo</span>
+            <span className="text-sm font-semibold tracking-wide">
+              {"Portf\u00f3lio Completo"}
+            </span>
           </div>
         </div>
       </header>
 
-      {/* Conteúdo Principal */}
-      <main className="relative z-10 pt-40 md:pt-36 pb-16 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto flex-grow">
-        
-        {/* Seção de Título */}
-        <div className="text-center mb-16">
+      <main className="relative z-10 mx-auto max-w-7xl flex-grow px-4 pb-16 pt-40 sm:px-6 md:px-8 md:pt-36">
+        <div className="mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 mt-4 md:mt-0">
+            <h1 className="mb-6 mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:mt-0 md:text-7xl">
               Galeria de <span style={gradientStyle}>Sucesso</span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Explore nossos projetos entregues. Cada site é desenvolvido estrategicamente para gerar resultados e fortalecer a marca dos nossos clientes.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Explore nossos projetos entregues. Cada site {"\u00e9"} desenvolvido
+              estrategicamente para gerar resultados e fortalecer a marca dos
+              nossos clientes.
             </p>
           </motion.div>
-
         </div>
 
-        {/* Filtros */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((cat) => {
-            const isActive = filter === cat;
-            const count = getCount(cat);
+        <div className="mb-12 flex flex-wrap justify-center gap-3">
+          {categories.map((category) => {
+            const isActive = filter === category;
+            const count = getCount(category);
+
             return (
               <Button
-                key={cat}
+                key={category}
                 variant={isActive ? "default" : "outline"}
-                onClick={() => setFilter(cat)}
-                className={`rounded-full px-5 h-10 transition-all duration-300 flex items-center gap-2 border ${
-                  isActive 
-                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-105 border-primary' 
-                    : 'bg-background/40 backdrop-blur-sm hover:bg-primary/10 hover:text-primary border-primary/20'
+                onClick={() => setFilter(category)}
+                className={`flex h-10 items-center gap-2 rounded-full border px-5 transition-all duration-300 ${
+                  isActive
+                    ? "scale-105 border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                    : "border-primary/20 bg-background/40 backdrop-blur-sm hover:bg-primary/10 hover:text-primary"
                 }`}
               >
-                {cat}
-                <span className={`flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[10px] font-bold rounded-full transition-colors ${
-                  isActive ? 'bg-background/20 text-primary-foreground' : 'bg-primary/10 text-primary'
-                }`}>
+                {category}
+                <span
+                  className={`flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold transition-colors ${
+                    isActive
+                      ? "bg-background/20 text-primary-foreground"
+                      : "bg-primary/10 text-primary"
+                  }`}
+                >
                   {count}
                 </span>
               </Button>
@@ -184,86 +115,18 @@ export default function PortfolioPage() {
           })}
         </div>
 
-        {/* Grid de Projetos */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
-                className="glass-card overflow-hidden group hover:border-primary/30 transition-colors duration-300 flex flex-col h-full bg-zinc-900/40 border-white/5"
-              >
-                {/* Imagem do Card */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    loading="lazy" 
-                  />
-                  {/* Overlay gradiente */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60" />
-                  
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-20">
-                    {project.badges.map(b => (
-                      <Badge key={b} className="bg-primary/90 text-primary-foreground text-[10px] backdrop-blur-md shadow-lg border-0">
-                        {b}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Overlay Hover com Botão (Desktop) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-[2px] z-10">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform"
-                    >
-                      <Globe className="h-4 w-4" />
-                      Visitar Site
-                    </a>
-                  </div>
-                </div>
-
-                {/* Informações do Projeto */}
-                <div className="p-5 flex flex-col flex-grow relative z-20">
-                  <div className="mb-2">
-                    <h3 className="font-bold text-lg leading-tight group-hover:text-primary transition-colors">{project.title}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs font-semibold text-primary">{project.category}</span>
-                      <span className="text-[10px] text-muted-foreground">•</span>
-                      <span className="text-xs text-muted-foreground">{project.subCategory}</span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-2 mb-4 flex-grow">{project.desc}</p>
-                  
-                  {/* Botão Visível apenas em Mobile */}
-                  <div className="md:hidden mt-auto pt-4 border-t border-primary/10">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center w-full gap-2 rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-                    >
-                      Ver Projeto <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <PortfolioGrid projects={filteredProjects} variant="portfolio" />
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 bg-primary/5 rounded-2xl border border-primary/10 mt-6">
-            <p className="text-muted-foreground">Nenhum projeto encontrado nesta categoria no momento.</p>
-            <Button variant="link" onClick={() => setFilter('Todos')} className="mt-2 text-primary">
+          <div className="mt-6 rounded-2xl border border-primary/10 bg-primary/5 py-20 text-center">
+            <p className="text-muted-foreground">
+              Nenhum projeto encontrado nesta categoria no momento.
+            </p>
+            <Button
+              variant="link"
+              onClick={() => setFilter("Todos")}
+              className="mt-2 text-primary"
+            >
               Ver todos os projetos
             </Button>
           </div>
