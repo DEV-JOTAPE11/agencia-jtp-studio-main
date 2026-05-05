@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -38,29 +38,38 @@ export function PortfolioPreviewCard({
       )}
     >
       <div className="p-3 pb-0">
-        <div
-          className={cn(
-            "portfolio-preview-scrollbar overflow-x-hidden overflow-y-auto rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
-            "touch-pan-y overscroll-contain focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
-            variant === "home"
-              ? "h-[260px] sm:h-[300px] lg:h-[320px]"
-              : "h-[280px] sm:h-[320px] lg:h-[340px]"
-          )}
-          tabIndex={0}
-          aria-label={`Preview rolavel do site ${project.title}`}
-        >
-          <img
-            src={imageSrc}
-            alt={`Preview completo do site ${project.title}`}
+        <div className="relative">
+          <div
             className={cn(
-              "block w-full select-none",
-              isUsingFallbackImage && "h-full object-cover"
+              "portfolio-preview-scrollbar overflow-x-hidden overflow-y-auto rounded-xl border border-primary/20 bg-background/80 shadow-inner shadow-black/30",
+              "touch-pan-y overscroll-contain focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
+              variant === "home"
+                ? "h-[260px] sm:h-[300px] lg:h-[320px]"
+                : "h-[280px] sm:h-[320px] lg:h-[340px]"
             )}
-            draggable={false}
-            loading="lazy"
-            decoding="async"
-            onError={handleImageError}
-          />
+            tabIndex={0}
+            aria-label={`Preview rolavel do site ${project.title}`}
+          >
+            <img
+              src={imageSrc}
+              alt={`Preview completo do site ${project.title}`}
+              className={cn(
+                "block w-full select-none",
+                isUsingFallbackImage && "h-full object-cover"
+              )}
+              draggable={false}
+              loading="lazy"
+              decoding="async"
+              onError={handleImageError}
+            />
+          </div>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 text-white/70 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]"
+          >
+            <ChevronDown className="h-5 w-5 animate-bounce" />
+          </div>
         </div>
       </div>
 

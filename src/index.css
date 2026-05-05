@@ -113,4 +113,15 @@
   .portfolio-preview-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--accent));
   }
+
+  @media (max-width: 767px) {
+    .portfolio-preview-scrollbar {
+      scrollbar-width: none;
+    }
+
+    .portfolio-preview-scrollbar::-webkit-scrollbar {
+      display: none;
+      width: 0;
+    }
+  }
 }

@@ -13,7 +13,7 @@ const WHATSAPP_NUMBER = '553899743350';
 const plans = [
   { id: 'landing' as const, name: 'Landing Page (Página única)', pages: '1 página', popular: false },
   { id: 'institucional' as const, name: 'Site Institucional', pages: '6 páginas', popular: true },
-  { id: 'premium' as const, name: 'Site Premium', pages: '6+ páginas', popular: false },
+  { id: 'premium' as const, name: 'E-commerce', pages: 'Loja Virtual', popular: false },
 ];
 
 type PlanId = typeof plans[number]['id'];

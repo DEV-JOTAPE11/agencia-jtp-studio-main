@@ -70,7 +70,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       "Site profissional para empresa de instala\u00e7\u00e3o de antenas, com portf\u00f3lio, depoimentos e formul\u00e1rio de contato.",
     coverImage: capaGlobo,
-    previewImage: "/images/portfolio/globo-sat-fullpage.webp",
+    previewImage: "/images/portfolio/globosatarinos-fullpage.webp",
     badges: ["Case de Sucesso", "Institucional"],
     tags: ["React", "Tailwind"],
     link: "https://www.globosatarinos.com.br",
@@ -99,7 +99,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       "Site s\u00f3brio e elegante para transmitir autoridade, confian\u00e7a e clareza em servi\u00e7os jur\u00eddicos.",
     coverImage: capaJustly,
-    previewImage: "/images/portfolio/justly-advogados-fullpage.webp",
+    previewImage: "/images/portfolio/lp-justly-fullpage.webp",
     badges: ["Corporativo", "Autoridade"],
     tags: ["React", "Tailwind"],
     link: "https://dev-jotape11.github.io/justly/",
