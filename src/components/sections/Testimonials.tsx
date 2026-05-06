@@ -1,36 +1,30 @@
 import { motion } from 'framer-motion';
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
-// 1. Importe suas fotos aqui
-import fotoJonas from "@/assets/jonos-logo.png";
-import fotoGlobo from "@/assets/globo-sat-logo.png";
-import fotoOc from "@/assets/ouro-do-cerrado-logo.png";
-import fotoMad from "@/assets/madness-logo.png";
-
 const testimonials = [
   { 
     name: 'Marcos', 
     role: 'CEO - Ouro do Cerrado Hotel', 
     text: 'O site ficou sensacional! nossos clientes aumentaram em 40% no primeiro mês de lançamento,sem contar na facilidade na hora do agendamento.', 
-    image: fotoOc 
+    image: "/images/testimonials/ouro-do-cerrado-logo-80.webp"
   },
   { 
     name: 'Gabriel Jonas', 
     role: 'Empresário-Barbeiro', 
     text: 'Depois que lancei minha landing-page, minhas vendas aumentaram 30% em um mês!', 
-    image: fotoJonas 
+    image: "/images/testimonials/jonos-logo-80.webp"
   },
   { 
     name: 'Globo Sat Arinos', 
     role: 'Empresa - Instalação de Antenas', 
     text: 'A criação do nosso site trouxe muito mais visibilidade para a Globo Sat. Agora nossos clientes encontram nossos planos de internet e TV com facilidade.', 
-    image: fotoGlobo 
+    image: "/images/testimonials/globo-sat-logo-80.webp"
   },
   { 
     name: 'Madness Clínica Veterinária', 
     role: 'Clínica Veterinária', 
     text: 'O site da clínica ficou incrível! Nossos clientes adoram a facilidade de agendamento online e a área do cliente. Já vimos um aumento significativo no número de consultas desde o lançamento.', 
-    image: fotoMad 
+    image: "/images/testimonials/madness-logo-80.webp"
   },
 ];
 

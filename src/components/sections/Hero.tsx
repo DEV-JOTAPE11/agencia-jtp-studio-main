@@ -1,28 +1,23 @@
-import { motion } from "framer-motion";
 import { ArrowDown, Star, ArrowUpRight } from "lucide-react";
-import jtpWhite from "@/assets/jtp-white.png";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export function Hero() {
   return (
-    // Ajuste aqui:
     // Adicionei 'pb-24' (padding bottom) para o mobile dar espaço para a seta
     // Adicionei 'md:pb-0' para resetar esse espaço no desktop
     <div className="relative flex min-h-screen flex-col items-center justify-start md:justify-center px-6 text-center pt-16 pb-24 md:pt-0 md:pb-0">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-3xl"
-      >
+      <div className="max-w-3xl">
         {/* Hero Logo */}
-        <motion.img
-          src={jtpWhite}
+        <img
+          src="/images/brand/jtp-white-320.webp"
+          srcSet="/images/brand/jtp-white-320.webp 320w, /images/brand/jtp-white-480.webp 480w"
+          sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, 160px"
           alt="JTP Services"
+          width={320}
+          height={136}
           className="mx-auto mb-6 h-20 sm:h-24 md:h-28 w-auto object-contain"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
+          fetchPriority="high"
+          decoding="async"
           style={{ filter: "drop-shadow(0 0 12px rgba(40,126,215,0.3))" }}
         />
 
@@ -103,12 +98,7 @@ export function Hero() {
         </div>
 
         {/* Stats Indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-12 flex items-center justify-center gap-6 sm:gap-10"
-        >
+        <div className="mt-12 flex items-center justify-center gap-6 sm:gap-10">
           <div className="text-center">
             <p className="text-2xl sm:text-3xl font-bold text-foreground">
               100%
@@ -129,14 +119,9 @@ export function Hero() {
             </p>
             <p className="text-xs text-muted-foreground mt-1">Sites Criados</p>
           </div>
-        </motion.div>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-2 z-10"
-      >
+        </div>
+      </div>
+      <div className="absolute bottom-2 z-10">
         <a
           href="#portfolio"
           className="block transition-opacity duration-300 hover:opacity-50 cursor-pointer"
@@ -144,7 +129,7 @@ export function Hero() {
         >
           <ArrowDown className="h-5 w-5 text-white/50 animate-bounce" />
         </a>
-      </motion.div>
+      </div>
     </div>
   );
 }

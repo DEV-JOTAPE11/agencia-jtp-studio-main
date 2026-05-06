@@ -1,12 +1,11 @@
 import { Instagram, Star } from 'lucide-react';
-import jtpLogo from '@/assets/logo-jtp-profissional.jpeg';
 
 export function Footer() {
   return (
     <footer className="border-t border-primary/15 bg-background/80 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <img src={jtpLogo} alt="JTP Services" className="h-8 w-8 rounded-lg object-cover" style={{ filter: 'drop-shadow(0 0 6px rgba(40,126,215,0.3))' }} />
+          <img src="/images/brand/logo-jtp-80.webp" alt="JTP Services" width={80} height={80} loading="lazy" decoding="async" className="h-8 w-8 rounded-lg object-cover" style={{ filter: 'drop-shadow(0 0 6px rgba(40,126,215,0.3))' }} />
           <div>
             <span className="text-sm font-medium">JTP Services — Criação de Sites</span>
             <div className="flex items-center gap-1 mt-1">
@@ -31,4 +30,3 @@ export function Footer() {
     </footer>
   );
 }
-

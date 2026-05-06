@@ -1,17 +1,33 @@
+import { lazy, Suspense } from 'react';
 import { BackgroundPaths } from '@/components/ui/background-paths';
 import { SideNav } from '@/components/layout/SideNav';
 import { MobileTopNav } from '@/components/layout/MobileTopNav';
 import { WhatsAppFab } from '@/components/layout/WhatsAppFab';
 import { Footer } from '@/components/layout/Footer';
+import { LazyOnView } from '@/components/LazyOnView';
 import { Hero } from '@/components/sections/Hero';
 import { Services } from '@/components/sections/Services';
-import { Portfolio } from '@/components/sections/Portfolio';
-import { Testimonials } from '@/components/sections/Testimonials';
-import { VideoTestimonials } from '@/components/sections/VideoTestimonials';
-import { Budget } from '@/components/sections/Budget';
-import { FAQ } from '@/components/sections/FAQ';
 
-const SHOW_VIDEO_TESTIMONIALS = false;
+const Portfolio = lazy(() =>
+  import('@/components/sections/Portfolio').then((module) => ({
+    default: module.Portfolio,
+  }))
+);
+const Testimonials = lazy(() =>
+  import('@/components/sections/Testimonials').then((module) => ({
+    default: module.Testimonials,
+  }))
+);
+const Budget = lazy(() =>
+  import('@/components/sections/Budget').then((module) => ({
+    default: module.Budget,
+  }))
+);
+const FAQ = lazy(() =>
+  import('@/components/sections/FAQ').then((module) => ({
+    default: module.FAQ,
+  }))
+);
 
 const Index = () => {
   return (
@@ -34,21 +50,32 @@ const Index = () => {
           <Services />
         </section>
         <section id="portfolio">
-          <Portfolio />
+          <LazyOnView placeholderClassName="min-h-[760px]" rootMargin="1200px 0px">
+            <Suspense fallback={null}>
+              <Portfolio />
+            </Suspense>
+          </LazyOnView>
         </section>
         <section id="depoimentos">
-          <Testimonials />
+          <LazyOnView placeholderClassName="min-h-[720px]" rootMargin="1200px 0px">
+            <Suspense fallback={null}>
+              <Testimonials />
+            </Suspense>
+          </LazyOnView>
         </section>
-       {SHOW_VIDEO_TESTIMONIALS && (
-          <section id="videos">
-            <VideoTestimonials />
-          </section>
-        )}
         <section id="orcamento">
-          <Budget />
+          <LazyOnView placeholderClassName="min-h-[700px]" rootMargin="1200px 0px">
+            <Suspense fallback={null}>
+              <Budget />
+            </Suspense>
+          </LazyOnView>
         </section>
         <section id="faq">
-          <FAQ />
+          <LazyOnView placeholderClassName="min-h-[620px]" rootMargin="1200px 0px">
+            <Suspense fallback={null}>
+              <FAQ />
+            </Suspense>
+          </LazyOnView>
         </section>
       </main>
 

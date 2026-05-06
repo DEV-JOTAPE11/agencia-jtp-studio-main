@@ -8,6 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 
 const WHATSAPP_NUMBER = '553899743350';
 
+type BriefingOption = {
+  id: string;
+  label: string;
+};
+
 const siteStatusOptions = [
   { id: 'nao', label: 'Não, estou começando agora' },
   { id: 'sim_refazer', label: 'Sim, mas quero refazer' },
@@ -59,7 +64,7 @@ export function BriefingForm() {
       return;
     }
 
-    const getLabel = (options: any[], id: string | null) => options.find(o => o.id === id)?.label || '';
+    const getLabel = (options: BriefingOption[], id: string | null) => options.find(o => o.id === id)?.label || '';
 
     const text = [
       `*Novo Briefing/Orçamento - JTP Services*`,
@@ -83,7 +88,7 @@ export function BriefingForm() {
   };
 
   const renderOptions = (
-    options: { id: string; label: string }[],
+    options: BriefingOption[],
     selected: string | null,
     onSelect: (id: string) => void
   ) => (

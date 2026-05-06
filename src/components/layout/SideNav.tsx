@@ -1,7 +1,6 @@
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Home, Briefcase, LayoutGrid, MessageSquareQuote, FileText, HelpCircle, ClipboardList } from 'lucide-react';
-import jtpLogo from '@/assets/logo-jtp-profissional.jpeg';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -37,7 +36,7 @@ export function SideNav() {
 
   return (
     <nav className="fixed left-0 top-0 z-40 hidden lg:flex h-screen w-16 flex-col items-center border-r border-primary/15 bg-background/80 backdrop-blur-sm py-6 gap-1">
-      <img src={jtpLogo} alt="JTP Services" className="h-10 w-10 rounded-lg mb-8 object-cover" style={{ filter: 'drop-shadow(0 0 6px rgba(40,126,215,0.3))' }} />
+      <img src="/images/brand/logo-jtp-80.webp" alt="JTP Services" width={80} height={80} decoding="async" className="h-10 w-10 rounded-lg mb-8 object-cover" style={{ filter: 'drop-shadow(0 0 6px rgba(40,126,215,0.3))' }} />
       {navItems.map((item) => {
         const isActive = item.path === '/' ? active === item.id && location.pathname === '/' : location.pathname === item.path;
         return (

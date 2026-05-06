@@ -10,8 +10,6 @@ import { BackgroundPaths } from "@/components/ui/background-paths";
 import { Button } from "@/components/ui/button";
 import { portfolioProjects } from "@/data/portfolioProjects";
 
-import jtpLogo from "@/assets/logo-jtp-profissional.jpeg";
-
 const categories = ["Todos", "Landing Page", "Institucional", "E-commerce"];
 
 export default function PortfolioPage() {
@@ -55,8 +53,11 @@ export default function PortfolioPage() {
           </Link>
           <div className="flex items-center gap-2">
             <img
-              src={jtpLogo}
+              src="/images/brand/logo-jtp-80.webp"
               alt="JTP Services"
+              width={80}
+              height={80}
+              decoding="async"
               className="h-8 w-8 rounded-lg object-cover shadow-lg shadow-primary/20"
             />
             <span className="text-sm font-semibold tracking-wide">

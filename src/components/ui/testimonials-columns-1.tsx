@@ -35,6 +35,10 @@ export const TestimonialsColumn = (props: {
                     <img
                       src={image}
                       alt={name}
+                      width={80}
+                      height={80}
+                      loading="lazy"
+                      decoding="async"
                       className="h-10 w-10 rounded-full object-cover border border-primary/20"
                     />
                     <div className="flex flex-col">

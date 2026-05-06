@@ -6,11 +6,13 @@
 
     <title>JTP Services | Agência de Desenvolvimento Web</title>
 
-    <link rel="icon" type="image/jpeg" href="/logo-jtp-profissional.jpeg" />
+    <link rel="preload" href="/fonts/space-grotesk-latin-400-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" type="image/webp" href="/images/brand/logo-jtp-80.webp" />
     <link
       rel="shortcut icon"
-      type="image/jpeg"
-      href="/logo-jtp-profissional.jpeg"
+      type="image/webp"
+      href="/images/brand/logo-jtp-80.webp"
     />
 
     <meta
@@ -44,16 +46,35 @@
     />
     <meta name="twitter:image" content="/logo-jtp-profissional.jpeg" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VLBP3DVQV"></script>
+    <!-- Google tag (gtag.js), deferred to keep the initial render path light. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+      window.addEventListener(
+        "load",
+        function () {
+          var loadAnalytics = function () {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () {
+              window.dataLayer.push(arguments);
+            };
 
-      gtag("config", "G-6VLBP3DVQV");
+            var script = document.createElement("script");
+            script.async = true;
+            script.src =
+              "https://www.googletagmanager.com/gtag/js?id=G-6VLBP3DVQV";
+            document.head.appendChild(script);
+
+            window.gtag("js", new Date());
+            window.gtag("config", "G-6VLBP3DVQV");
+          };
+
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(loadAnalytics, { timeout: 3000 });
+          } else {
+            window.setTimeout(loadAnalytics, 1200);
+          }
+        },
+        { once: true }
+      );
     </script>
   </head>
 

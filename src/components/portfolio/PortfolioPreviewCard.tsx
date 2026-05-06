@@ -52,7 +52,17 @@ export function PortfolioPreviewCard({
           >
             <img
               src={imageSrc}
+              srcSet={
+                imageSrc === project.previewImage
+                  ? project.previewSrcSet
+                  : undefined
+              }
+              sizes={
+                imageSrc === project.previewImage ? project.previewSizes : undefined
+              }
               alt={`Preview completo do site ${project.title}`}
+              width={project.previewWidth}
+              height={project.previewHeight}
               className={cn(
                 "block w-full select-none",
                 isUsingFallbackImage && "h-full object-cover"

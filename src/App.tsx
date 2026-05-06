@@ -1,35 +1,30 @@
 // src/App.tsx
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { lazy, Suspense } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import PortfolioPage from "./pages/PortfolioPage"; // <--- Importe o novo arquivo
-import NotFound from "./pages/NotFound";
-import FormularioPage from "./pages/FormularioPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
 
-const queryClient = new QueryClient();
+const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const FormularioPage = lazy(() => import("./pages/FormularioPage"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+  <TooltipProvider>
+    <BrowserRouter>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/portfolio" element={<PortfolioPage />} /> {/* <--- Adicione esta linha */}
+          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/formulario" element={<FormularioPage />} />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+      </Suspense>
+    </BrowserRouter>
+  </TooltipProvider>
 );
 
 export default App;
