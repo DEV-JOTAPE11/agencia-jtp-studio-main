@@ -55,7 +55,7 @@ export const portfolioProjects: PortfolioProject[] = [
       "/images/portfolio/optimized/hotel-ouro-cerrado-fullpage-384.webp 384w, /images/portfolio/optimized/hotel-ouro-cerrado-fullpage-768.webp 768w",
     previewSizes: portfolioPreviewSizes,
     previewWidth: 384,
-    previewHeight: 1600,
+    previewHeight: 1678,
     badges: ["Premium", "Sistema de Reservas"],
     tags: ["React", "Tailwind", "Vite"],
     link: "https://www.hotelourodocerrado.com.br",
