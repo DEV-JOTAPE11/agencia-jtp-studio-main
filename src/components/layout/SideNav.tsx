@@ -1,6 +1,6 @@
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Home, Briefcase, LayoutGrid, MessageSquareQuote, FileText, HelpCircle, ClipboardList } from 'lucide-react';
+import { Home, Briefcase, LayoutGrid, MessageSquareQuote, FileText, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -10,7 +10,6 @@ const navItems = [
   { id: 'depoimentos', icon: MessageSquareQuote, label: 'Depoimentos', path: '/' },
   { id: 'orcamento', icon: FileText, label: 'Orçamento', path: '/' },
   { id: 'faq', icon: HelpCircle, label: 'FAQ', path: '/' },
-  { id: 'formulario', icon: ClipboardList, label: 'Formulário', path: '/formulario' },
 ];
 
 export function SideNav() {

@@ -6,7 +6,6 @@ import Index from "./pages/Index";
 
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const FormularioPage = lazy(() => import("./pages/FormularioPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
 
@@ -17,7 +16,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/formulario" element={<FormularioPage />} />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />

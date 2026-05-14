@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, Home, Briefcase, LayoutGrid, MessageSquareQuote, FileText, HelpCircle, ClipboardList } from 'lucide-react';
+import { Menu, Home, Briefcase, LayoutGrid, MessageSquareQuote, FileText, HelpCircle } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ const navItems = [
   { id: 'depoimentos', icon: MessageSquareQuote, label: 'Depoimentos', path: '/' },
   { id: 'orcamento', icon: FileText, label: 'Orçamento', path: '/' },
   { id: 'faq', icon: HelpCircle, label: 'FAQ', path: '/' },
-  { id: 'formulario', icon: ClipboardList, label: 'Formulário', path: '/formulario' },
 ];
 
 export function MobileTopNav() {
@@ -20,7 +19,7 @@ export function MobileTopNav() {
 
   const handleNavigation = (item: typeof navItems[0]) => {
     setOpen(false);
-    
+
     if (item.path !== '/') {
       navigate(item.path);
       return;
