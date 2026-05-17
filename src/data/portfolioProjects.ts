@@ -95,7 +95,7 @@ export const portfolioProjects: PortfolioProject[] = [
       "/images/portfolio/optimized/globosatarinos-fullpage-384.webp 384w, /images/portfolio/optimized/globosatarinos-fullpage-768.webp 768w",
     previewSizes: portfolioPreviewSizes,
     previewWidth: 384,
-    previewHeight: 1584,
+    previewHeight: 1774,
     badges: ["Case de Sucesso", "Institucional"],
     tags: ["React", "Tailwind"],
     link: "https://www.globosatarinos.com.br",
